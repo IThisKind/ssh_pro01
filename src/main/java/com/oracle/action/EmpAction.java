@@ -6,10 +6,7 @@ import com.oracle.service.EmpService;
 import com.oracle.service.Page;
 import com.oracle.utils.ValueContext;
 import lombok.*;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.AllowedMethods;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +21,7 @@ import javax.annotation.Resource;
  * @UpdateRemark:
  * @Version: 1.0
  **/
+@Namespace("/")
 @ParentPackage("struts-default")
 @Action(value = "emp_*",
         results = {

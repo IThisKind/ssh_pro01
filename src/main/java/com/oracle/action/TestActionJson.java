@@ -25,7 +25,7 @@ import java.nio.channels.Pipe;
 @Action(
         value = "json_*",
         results = {
-                @Result(type = "json", params = {"root", "{1}"})
+                @Result(type = "json", params = {"root", "json"})
         }
 )
 @AllowedMethods({"test"})
@@ -37,7 +37,6 @@ public class TestActionJson extends ActionSupport {
     public String test() {
         System.out.println(111);
         json = JSONObject.parse("{'a':2}");
-
         return "success";
     }
 }

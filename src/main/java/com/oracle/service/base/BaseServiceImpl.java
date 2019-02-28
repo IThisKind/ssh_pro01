@@ -113,7 +113,6 @@ public abstract class BaseServiceImpl<T, PK extends Serializable> implements Bas
         } catch (Exception e) {
             page = 1;
             rows = 6;
-            e.printStackTrace();
         }
         Page p = new Page();
         Long count = baseDao.count();

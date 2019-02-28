@@ -1,5 +1,7 @@
 package com.oracle.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class Dept {
     private Integer deptno;
     private String dname;
     private String loc;
+
+    @JSONField(serialize = false)
     private List<Emp> emps;
 
     @Id
