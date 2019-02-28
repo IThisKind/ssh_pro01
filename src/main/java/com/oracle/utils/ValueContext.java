@@ -8,32 +8,39 @@ import com.opensymphony.xwork2.ActionContext;
  * <p>Title: ValueContext</p>
  * <p>Description:值栈 </p>
  *
- * @author 丁乾文
  * @version 1.0
  * @date 2019年2月19日
  */
 public class ValueContext {
 
     /**
-     * 放置在Root栈中
-     * <p>Title: putValueContext</p>
-     * <p>Description: </p>
-     *
-     * @param key
-     * @param value
-     */
+     * @Description:
+     * @Author: 牛
+     * @Param: [key, value]
+     * @Return void
+     **/
     public static void putValueContext(String key, Object value) {
         ActionContext.getContext().put(key, value);
     }
 
     /**
-     * 压入栈顶
-     * <p>Title: putValueStack</p>
-     * <p>Description: </p>
-     *
-     * @param o
-     */
+     * @Description:
+     * @Author: 牛
+     * @Param: [o]
+     * @Return void
+     **/
     public static void putValueStack(Object o) {
         ServletActionContext.getContext().getValueStack().push(o);
+    }
+
+    /**
+     * @Description: 放入请求属性中
+     * @Author: 牛
+     * @Param: [key, value]
+     * @Return void
+     **/
+    public static void setAtribute(String key, Object value) {
+        ServletActionContext.getRequest().setAttribute(key, value);
+
     }
 }
