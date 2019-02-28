@@ -3,6 +3,8 @@ package com.oracle.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import com.oracle.action.vo.ResponseCode;
+import com.oracle.action.vo.ServerResponse;
 import com.oracle.pojo.Emp;
 import com.oracle.service.EmpService;
 import com.oracle.service.Page;
@@ -58,7 +60,16 @@ public class EmpActionJson extends ActionSupport {
         System.out.println("getPage_json");
         System.out.println(currentPage + "\t" + size);
         Page<Emp> page = empService.findOnePage(currentPage, size);
-        json = JSONObject.toJSON(page);
+        try {
+            //正常
+            json = JSONObject.toJSON(ServerResponse.createBySuccess(page));
+        } catch (Exception e) {
+            //异常
+            json = JSONObject.toJSON(ServerResponse.createByException(ResponseCode.ERROR.getCode(), "未知异常"));
+
+            e.printStackTrace();
+        }
+
 
         return "success";
     }
