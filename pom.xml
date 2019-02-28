@@ -84,14 +84,11 @@
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
-<<<<<<< HEAD
-=======
         <dependency>
             <groupId>aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.5.4</version>
         </dependency>
->>>>>>> 更新了 baseService
 
         <!--struts整个spring-->
         <dependency>
