@@ -29,7 +29,7 @@ import javax.servlet.ServletContext;
 @ParentPackage("/")
 @Action(value = "emp_*",
         results = {
-                @Result(name = "{1}", location = "/page.jsp")
+                @Result(name = "{1}", location = "/list.jsp")
         }
 )
 @Component
