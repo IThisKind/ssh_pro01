@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.oracle.action.vo.ResponseCode;
 import com.oracle.action.vo.ServerResponse;
+import com.oracle.action.vo.Struts;
 import com.oracle.pojo.Emp;
 import com.oracle.service.EmpService;
 import com.oracle.service.Page;
@@ -26,7 +27,7 @@ import javax.annotation.Resource;
  * @Version: 1.0
  **/
 @Namespace("/")
-@ParentPackage("json-default")
+@ParentPackage(Struts.JSON)
 @Action(
         value = "emp-*",
         results = {
@@ -35,7 +36,7 @@ import javax.annotation.Resource;
 )
 @AllowedMethods({"getPage"})
 @Component
-@Scope("prototype")
+@Scope(Struts.SCOPE)
 @Setter
 @Getter
 public class EmpActionJson extends ActionSupport {

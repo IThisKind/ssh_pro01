@@ -1,6 +1,7 @@
 package com.oracle.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.oracle.action.vo.Struts;
 import com.oracle.pojo.Emp;
 import com.oracle.service.EmpService;
 import com.oracle.service.Page;
@@ -22,14 +23,14 @@ import javax.annotation.Resource;
  * @Version: 1.0
  **/
 @Namespace("/")
-@ParentPackage("struts-default")
+@ParentPackage(Struts.STRUTS)
 @Action(value = "emp_*",
         results = {
                 @Result(name = "{1}", location = "/list.jsp")
         }
 )
 @Component
-@Scope("prototype")
+@Scope(Struts.SCOPE)
 @AllowedMethods({"getPage"})
 @Setter
 @Getter

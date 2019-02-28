@@ -6,10 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="js/jquery-3.3.1.min.js"></script>
 <h1>
-    <button id="b"> 获取json数据</button>
-    3
-
-
+    <button id="b">获取json数据</button>
     com.oracle.action.EmpActionJson
     <br/>
     <a href="list.jsp">

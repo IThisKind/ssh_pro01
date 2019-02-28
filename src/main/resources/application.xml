@@ -53,8 +53,10 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <!-- 打开注解事务-->
+    <!-- 打开声明式注解事务-->
     <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+    <!--引用切面事务-->
+    <!-- <import resource="classpath*:application-tx.xml"/>-->
 
 
 </beans>

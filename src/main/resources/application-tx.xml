@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+					  	http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+					  	http://www.springframework.org/schema/aop/spring-aop.xsd
+					  	http://www.springframework.org/schema/tx
+					  	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 事务管理 -->
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!-- 引用事务类型的建议 -->
+    <tx:advice id="txAdivce" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" read-only="false" propagation="REQUIRED"/>
+            <!-- 配置查询事务建议 -->
+            <tx:method name="get*" read-only="true" propagation="SUPPORTS"/>
+            <tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置事务切面 -->
+    <aop:config>
+        <!-- 配置切入点表达式 -->
+        <aop:pointcut expression="execution(* com.oracle.service.*.*(..))"
+                      id="tx"/>
+        <!-- 建立切入点表达式和事务的关联 -->
+        <aop:advisor advice-ref="txAdivce" pointcut-ref="tx"/>
+    </aop:config>
+
+
+</beans>
