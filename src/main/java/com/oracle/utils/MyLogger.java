@@ -24,8 +24,6 @@ import org.springframework.stereotype.Component;
 @Component("logger")
 public class MyLogger {
 
-    // 当前毫秒 线程不安全的.........
-    static Long ss = 0L;
 
     static Logger logger = LogManager.getLogger(MyLogger.class.getName());
 
@@ -38,7 +36,6 @@ public class MyLogger {
      */
     @Before("printLog()")
     public void beforPrintLog(JoinPoint joinpoint) {
-        ss = System.currentTimeMillis();
         logger.info("前置通知: 》》被调用类:!>>" + joinpoint.getTarget().getClass().getName() + "<<!");
         logger.info("      	     》》被调用方法:(" + joinpoint.getSignature().getName() + ")");
         logger.info("          》》请求参数列表:" + Arrays.toString(joinpoint.getArgs()));
@@ -67,8 +64,7 @@ public class MyLogger {
      */
     @After("printLog()")
     public void afterPrintLog(JoinPoint joinpoint) {
-        logger.info("最终通知: 》》(" + joinpoint.getSignature().getName() + ")执行结束 耗时:" + (System.currentTimeMillis() - ss)
-                + " 毫秒");
+        logger.info("最终通知: 》》(" + joinpoint.getSignature().getName() + ")执行结束");
     }
 
     /**
