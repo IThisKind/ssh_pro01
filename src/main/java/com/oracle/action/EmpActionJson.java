@@ -1,11 +1,13 @@
 package com.oracle.action;
 
-import com.opensymphony.xwork2.ActionSupport;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.oracle.pojo.Emp;
 import com.oracle.service.EmpService;
 import com.oracle.service.Page;
 import com.oracle.utils.ValueContext;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.AllowedMethods;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -16,18 +18,19 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * @Description: 雇员的动作类
+ * @Description: 雇员的返回json数据格式动作
  * @Author: 牛
- * @CreateDate: 2019/2/28 10:41
+ * @CreateDate: 2019/2/28 11:35
  * @UpdateUser: 牛
- * @UpdateDate: 2019/2/28 10:41
+ * @UpdateDate: 2019/2/28 11:35
  * @UpdateRemark:
  * @Version: 1.0
  **/
-@ParentPackage("struts-default")
-@Action(value = "emp_*",
+@ParentPackage("json-default")
+@Action(
+        value = "emp-*",
         results = {
-                @Result(name = "{1}", location = "/list.jsp")
+                @Result(type = "json", params = {"root", "*"})
         }
 )
 @Component
@@ -35,8 +38,7 @@ import javax.annotation.Resource;
 @AllowedMethods({"getPage"})
 @Setter
 @Getter
-public class EmpAction extends ActionSupport {
-
+public class EmpActionJson {
     @Resource(name = "empService")
     private EmpService empService;
 
@@ -45,6 +47,8 @@ public class EmpAction extends ActionSupport {
     //每页大小
     private Integer size;
 
+    private JSON json;
+
     /**
      * @Description: 查看一页数据
      * @Author: 牛
@@ -52,10 +56,13 @@ public class EmpAction extends ActionSupport {
      * @Return java.lang.String
      **/
     public String getPage() {
-        System.out.println("getPage");
+
+        System.out.println("getPage_json");
         System.out.println(currentPage + "\t" + size);
         Page<Emp> page = empService.findOnePage(currentPage, size);
-        ValueContext.setAtribute("page", page);
+
+        Object o = JSONObject.toJSON(page);
+        System.out.println("o = " + o);
 
         return "list";
     }

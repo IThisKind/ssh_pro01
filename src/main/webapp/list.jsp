@@ -6,14 +6,15 @@
 </head>
 <body>
 <div>
-    page:${page}
+    <c:if test="${empty page}">
+        <c:redirect url="emp_list!getPage"></c:redirect>
+    </c:if>
     <table cellpadding="0" cellspacing="0" border="8" width="400">
         <tr>
             <th>编号</th>
             <th>名称</th>
             <th>职位</th>
             <th>薪资</th>
-            <th colspan="2">操作</th>
         </tr>
         <c:forEach items="${page.data}" var="i">
             <tr>
@@ -21,21 +22,18 @@
                 <th>${i.ename}</th>
                 <th>${i.job}</th>
                 <th>${i.sal}</th>
-                <th>
-                    <button><a href=".action?empno=${i.empno}">详情</a></button>
-                </th>
-                <th>
-                    <button><a href=".action?empno=${i.empno}">删除</a></button>
-                </th>
             </tr>
         </c:forEach>
     </table>
-    <a href="add.jsp">添加</a>
 
     <h6>当前页数${page.currPageNo}/共${page.totalPageCount}页</h6>
 
-    <button><a href="getPage!getPage?currentPage=${page.currPageNo-1}">上一页</a></button>
-    <button><a href="getPage!getPage?currentPage=${page.currPageNo+1}">下一页</a></button>
+    <a href="emp_list!getPage?currentPage=${page.currPageNo-1}&size=6">
+        上一页
+    </a>
+    <a href="emp_list!getPage?currentPage=${page.currPageNo+1}&size=6">
+        下一页
+    </a>
 
 </div>
 
